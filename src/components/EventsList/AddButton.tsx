@@ -7,7 +7,7 @@ function AddButton({ id }: Props) {
   return (
     <button
       type="button"
-      className="group rounded-full border border-transparent bg-slate-700 p-2 text-white shadow-sm hover:bg-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2"
+      className="group rounded-full border border-transparent bg-slate-700 p-2 text-slate-50 shadow-sm hover:bg-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2"
       onClick={() => addEventId(id)}
     >
       <span className="sr-only">Add to ShoppingCart</span>

@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
+import { memo } from "react";
 
 type Props = { children: React.ReactNode };
 
-function EventsList({ children }: Props) {
+function UnmemoizedEventsList({ children }: Props) {
   return (
     <motion.ul
       role="list"
@@ -12,4 +13,5 @@ function EventsList({ children }: Props) {
     </motion.ul>
   );
 }
+const EventsList = memo(UnmemoizedEventsList);
 export { EventsList };

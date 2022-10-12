@@ -29,13 +29,8 @@ function CartPage() {
             <EventsList>
               <LayoutGroup>
                 {cartEvents &&
-                  cartEvents.map((event) => (
-                    <EventCard
-                      isSearch={false}
-                      isVisible={cart.has(event.id)}
-                      key={event.id}
-                      {...event}
-                    />
+                  cartEvents.map(({ id, ...event }) => (
+                    <EventCard key={id} {...{ id, ...event }} />
                   ))}
               </LayoutGroup>
             </EventsList>

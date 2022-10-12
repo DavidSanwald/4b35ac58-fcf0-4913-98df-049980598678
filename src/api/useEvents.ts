@@ -1,17 +1,23 @@
 import { PlannedEventsList, eventsListSchema, PlannedEvent, url } from "@/data";
 import { useQuery } from "@tanstack/react-query";
+import dayjs from "dayjs";
 import Fuse from "fuse.js";
 
+const dateComparator = (
+  [dateA, _]: [dateA: string, _: PlannedEventsList],
+  [dateB, __]: [dateB: string, __: PlannedEventsList]
+) => (dayjs(dateA).isAfter(dateB) ? 1 : -1);
+
 const groupBy = (list: PlannedEventsList) => {
-  const getKey = (event: PlannedEvent) => event.date;
+  const getKey = ({ date }: PlannedEvent) => date;
   return list.reduce((previous, currentItem) => {
-    const group = getKey(currentItem);
-    if (!(group in previous)) {
-      previous[group] = [];
+    const dateGroup = getKey(currentItem);
+    if (!(dateGroup in previous)) {
+      previous[dateGroup] = [];
     }
-    (previous[group] as unknown[]).push(currentItem);
+    previous[dateGroup]!.push(currentItem);
     return previous;
-  }, {} as Record<string, PlannedEventsList>);
+  }, {} as { [key: string]: PlannedEventsList });
 };
 
 async function fetchEvents(): Promise<PlannedEventsList> {
@@ -32,4 +38,4 @@ const useSearchFuseQuery = () => {
       new Fuse(data, { includeScore: true, keys: ["title"] }),
   });
 };
-export { useEvents, groupBy, useSearchFuseQuery };
+export { dateComparator, useEvents, groupBy, useSearchFuseQuery };

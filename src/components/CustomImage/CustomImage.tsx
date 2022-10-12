@@ -10,6 +10,7 @@ function CustomImage({ src, alt, className, fallbackSrc, ...rest }: Props) {
       src={usedSrc}
       alt={alt}
       className={className}
+      loading="lazy"
       {...rest}
     />
   );

@@ -1,6 +1,6 @@
 import { proxy } from "valtio";
 import { proxySet } from "valtio/utils";
-import { Id } from "../api/schema";
+import { Id } from "@/api/schema";
 
 const state = proxy({ cart: proxySet<Id>() });
 
